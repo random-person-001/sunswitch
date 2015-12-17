@@ -23,7 +23,7 @@ case $1 in
         sunswitch-background "$@" & disown
         exit;;
     -h|--help)
-
+        helptext
         exit;;
     "")
         echo "no option specified; assuming settings dialogue"
