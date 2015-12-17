@@ -36,7 +36,7 @@ class ListBoxWindow(Gtk.Window):
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         hbox.pack_start(vbox, True, True, 0)
 
-        label1 = Gtk.Label("Automatic Update Background", xalign=0)
+        label1 = Gtk.Label("Background Automatic Update", xalign=0)
         label2 = Gtk.Label("Requires internet access", xalign=0)
         vbox.pack_start(label1, True, True, 0)
         vbox.pack_start(label2, True, True, 0)
