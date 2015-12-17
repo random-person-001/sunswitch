@@ -1,0 +1,4 @@
+#!/bin/bash
+mkdir $HOME"/.config/sunswitch" #For settings.txt
+pip install cv2  # Install a dependency
+exit

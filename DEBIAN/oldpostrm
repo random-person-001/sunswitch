@@ -1,0 +1,31 @@
+#!/bin/bash
+#Remove all files made by sunswitch
+
+rm -f -r -d ~/.config/sunswitch
+rm -f /usr/bin/sunswitch
+rm -f /usr/bin/sunswitch~
+rm -f /usr/bin/sunswitch-background
+rm -f /usr/bin/sunswitch-background~
+rm -f /usr/bin/sunswitch-settings
+rm -f /usr/bin/sunswitch-settings~
+rm -f -r -d /usr/lib/sunswitch
+rm -f -r -d /usr/share/doc/sunswitch
+rm -f /usr/share/applications/sunswitch-once.desktop
+rm -f /usr/share/applications/sunswitch-settings.desktop
+rm -f /usr/share/applications/sunswitch-once.desktop~
+rm -f /usr/share/applications/sunswitch-settings.desktop~
+rm -f "/usr/share/app-install/desktop/sunswitch-settings:sunswitch-settings.desktop"
+rm -f "/usr/share/app-install/desktop/sunswitch-settings:sunswitch-settings.desktop~"
+rm -f "/usr/share/app-install/desktop/sunswitch:sunswitch.desktop"
+rm -f "/usr/share/app-install/desktop/sunswitch:sunswitch.desktop~"
+rm -f /usr/share/app-install/icons/sunswitch
+rm -f /usr/share/app-install/icons/sunswitch.ico
+rm -f /usr/share/app-install/icons/sunswitch-icon.png
+rm -f /usr/share/app-install/icons/sunswitch-settings-icon.png
+rm -f /usr/share/app-install/icons/sunswitch-settings.png
+rm -f /usr/share/doc/applications/sunswitch-once.desktop
+rm -f /usr/share/doc/applications/sunswitch-once.desktop~
+rm -f /usr/share/doc/applications/sunswitch-settings.desktop
+rm -f /usr/share/doc/applications/sunswitch-settings.desktop~
+
+exit

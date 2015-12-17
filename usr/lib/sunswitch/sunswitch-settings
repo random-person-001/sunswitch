@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+#make sure directories are kosher
+mkdir -p "$HOME/.config/sunswitch"
+SETTINGS="$HOME/.config/sunswitch/settings.txt"
+touch $SETTINGS
+#Sometimes, if you run these as sudo, they'll be weird on the permissions.
+chmod +rw+rw+rw $SETTINGS 
+
+LOG="$HOME/.config/sunswitch/sunswitchLog"
+
+python /usr/lib/sunswitch/settingsGUI.py "$@" >> $LOG
+ 
+exit

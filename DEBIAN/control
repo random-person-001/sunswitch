@@ -1,0 +1,15 @@
+Package: sunswitch
+Version: 2.00
+Section: misc
+Installed-Size: 1000
+Priority: optional
+Architecture: all
+Depends: python (>= 2.7.0)
+Maintainer: Riley Hunt <rileylegos6@gmail.com>
+Description: Let your desktop reflect the sun
+ Sunswitch is a program intended to download the latest images of the sun from NASA, 
+ tweak them, and set them as your desktop background.  It's written in Python, with
+ some bash frontends.
+ .
+ You can configure sunswitch with the gui window, or add it to the list of programs
+ to begin on startup (Startup programs > add > command:"sunswitch-background").

@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Name=Sunswitch Once (sunswitch:sunswitch.desktop)!
+Comment=Change desktop wallpapers to the sun
+Exec=/usr/bin/sunswitch %U
+Terminal=true
+Icon=/usr/share/doc/sunswitch/sunswitch-icon.png
+Type=Application
+Categories=Application;Programming;Graphic;Setting;
+Comment=Run sunswitch, once
+StartupNotify=true
+Actions=Background;GUI;
+
+[Desktop Action Background]
+Name=Run in the Background
+Exec=/usr/bin/sunswitch --background
+#Icon=/usr/share/doc/sunswitch/sunswitch-icon.png
+
+[Desktop Action GUI]
+Name=Open up a Settings Dialouge
+Exec=/usr/bin/sunswitch --settings
+#Icon=/usr/share/doc/sunswitch/sunswitch-settings-icon.png

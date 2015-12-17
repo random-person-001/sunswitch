@@ -1,0 +1,60 @@
+#!/bin/bash
+PID=`pgrep -n sunswitch`
+#echo $PID
+#make sure directories are kosher
+mkdir -p "$HOME/.config/sunswitch"
+LOG="$HOME/.config/sunswitch/sunswitchLog"
+SETTINGS="$HOME/.config/sunswitch/settings.txt"
+touch $SETTINGS
+#Sometimes, if you run these as sudo, they'll be weird on the permissions.
+chmod +rw+rw+rw $SETTINGS 
+
+function helptext () {
+    echo "sunswitch-background usage:"
+    echo "   sunswitch-background [initialDelay]"
+}
+
+INITIALDELAY=$1
+re='^[0-9]+$'
+
+
+if [ -z "$INITIALDELAY"] ; then 
+    INITIALDELAY=20
+else
+    if ! [[ "$INITIALDELAY" =~ $re ]] ; then
+        helptext
+        exit 1
+    fi    
+    shift
+fi
+
+
+
+CONTINUE=`head -n 1 "$HOME/.config/sunswitch/settings.txt"` #Only continue if within user's wishes
+if [ "$CONTINUE" != "False" ]; then
+    echo "" >> $LOG #newline
+    echo "" >> $LOG #newline
+    echo "" >> $LOG #newline
+    echo "" >> $LOG #newline
+    echo $(date +%Y%h%d) >> $LOG #date
+
+    echo "/usr/bin/sunswitch-background starting with PID " $PID >> $LOG
+    echo "PID is" $PID
+    echo "delaying start"
+    sleep "$INITIALDELAY"
+
+    for i in {1..800}
+    do
+       echo "iteration $i"
+       python /usr/lib/sunswitch/getSun.py "$@" >> $LOG && sleep 1200 # 1200=20min
+    done
+
+    echo "Finished"
+    echo "bash sunswitch finished!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" >> $LOG
+    exit 0
+else
+    echo "Shouldn't be here.  Bye!"
+    #echo "Settings say not to do this.  Bye!" >> $LOG #Only really for debug
+fi
+
+exit

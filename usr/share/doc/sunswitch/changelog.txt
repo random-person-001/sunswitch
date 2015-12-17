@@ -1,0 +1,13 @@
+sunswitch (2.00) all; urgency=optional
+  * Desktop shortcuts work
+  * Errors better handled
+  * Set wallpaper automatically on running
+  * Cleaned up package
+  * Minor tweaks to underlying python programs
+
+ -- Riley <rileylegos6@gmail.com>  Wed, 16 Dec 2015 01:15:55 -0200
+
+sunswitch (1.00) all; urgency=optional
+  * Python programs bundled into yucky debian
+ -- Riley <rileylegos6@gmail.com>  Mon, 10 Nov 2015 10:23:21 -0100
+

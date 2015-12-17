@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#set their wallpaper
+gsettings set org.gnome.desktop.background picture-uri file://$HOME/Pictures/Wallpapers/latest-sun-new.jpg
+
+function helptext (){
+    echo hi
+    echo "Usage: sunswitch [options]"
+    echo "   OPTIONS"
+    echo "     -b    --background    run sunswitch in the background"
+    echo "     -s    --settings      run the settings dialouge"
+}
+
+case $1 in
+    -s|--settings)
+        echo "running settings dialouge"
+        shift
+        sunswitch-settings "$@"
+        exit;;
+    -b|--background)
+        echo "running in background"
+        shift
+        sunswitch-background "$@" & disown
+        exit;;
+    -h|--help)
+
+        exit;;
+    "")
+        echo "no option specified; assuming settings dialouge"
+        sunswitch-settings "$@"
+        exit;;
+    *)
+        echo "bad option"
+        helptext
+esac
+
+exit 1

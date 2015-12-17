@@ -1,0 +1,26 @@
+[Desktop Entry]
+Version=2
+Name=Sunswitch!
+Comment=Change desktop wallpapers
+Exec=/usr/bin/sunswitch %U
+Icon=/usr/share/app-install/icons/sunswitch-icon.png
+Terminal=true
+Type=Application
+Categories=Application;Programming;Graphic;Setting;
+StartupNotify=true
+
+Actions=Background;GUI;
+
+[Desktop Action Background]
+Name=Run in the Background
+Exec=/usr/bin/sunswitch --background
+TargetEnvironmet=Unity
+#Icon=/usr/share/doc/sunswitch/sunswitch-icon.png
+
+[Desktop Action GUI]
+Name=Open up a Settings Dialouge
+Exec=/usr/bin/sunswitch --settings
+TargetEnvironmet=Unity
+#Icon=/usr/share/doc/sunswitch/sunswitch-settings-icon.png
+
+
