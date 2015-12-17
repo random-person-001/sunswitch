@@ -6,7 +6,7 @@ Priority: optional
 Architecture: all
 Depends: python (>= 2.7.0)
 Maintainer: Riley Hunt <rileylegos6@gmail.com>
-Description: Sunswitch
+Description: Sunswitch Utility
  Let your desktop reflect the sun!
  .
  Sunswitch is a program intended to download the latest images of the sun from NASA, 
