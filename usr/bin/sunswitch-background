@@ -18,7 +18,7 @@ INITIALDELAY=$1
 re='^[0-9]+$'
 
 
-if [ -z "$INITIALDELAY"] ; then 
+if [ -z "$INITIALDELAY" ] ; then 
     INITIALDELAY=20
 else
     if ! [[ "$INITIALDELAY" =~ $re ]] ; then
