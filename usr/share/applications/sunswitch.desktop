@@ -18,7 +18,7 @@ TargetEnvironmet=Unity
 #Icon=/usr/share/doc/sunswitch/sunswitch-icon.png
 
 [Desktop Action GUI]
-Name=Open up a Settings Dialouge
+Name=Open Settings Dialouge
 Exec=/usr/bin/sunswitch --settings
 TargetEnvironmet=Unity
 #Icon=/usr/share/doc/sunswitch/sunswitch-settings-icon.png
