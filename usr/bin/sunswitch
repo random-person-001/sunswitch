@@ -20,7 +20,7 @@ case $1 in
     -b|--background)
         echo "running in background"
         shift
-        sunswitch-background "$@" & disown
+        sunswitch-background "$@"
         exit;;
     -h|--help)
         helptext

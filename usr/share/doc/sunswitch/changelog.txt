@@ -1,3 +1,7 @@
+sunswitch (2.15) all; urgency=optional
+  * Workaround for failure to import cv2 
+  * Make sunswitch-background handle errors nicerly
+
 sunswitch (2.10) all; urgency=optional
   * Tweak grammars
   * --help option better

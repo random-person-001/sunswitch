@@ -46,7 +46,8 @@ if [ "$CONTINUE" != "False" ]; then
     for i in {1..800}
     do
        echo "iteration $i"
-       python /usr/lib/sunswitch/getSun.py "$@" >> $LOG && sleep 1200 # 1200=20min
+       python /usr/lib/sunswitch/getSun.py "$@" >> $LOG
+       sleep 1200 # 1200=20min
     done
 
     echo "Finished"
