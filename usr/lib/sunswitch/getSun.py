@@ -1,21 +1,25 @@
 #!/usr/bin/env python
-import cv2
+
+# The following two lines are a workaround if cv2 is not recognised when installed.  If you didn't have problems
+# with importing cv2 otherwise, you can just comment them out.
+
+
+try:
+    import cv2
+    print "cv2 found the normal way"
+except ImportError as er:
+    import sys
+    sys.path.append('/usr/local/lib/python2.7/site-packages')    
+    import cv2
+    print "cv2 found with the workaround of adding usr/local/lib/....../site-packages"
+    
+    
 #import Image #not used, no more need to convert gif to png or jpg
 
 import urllib
 import os
-#import sys
 #sys.path.append(os.path.abspath("/usr/lib/sunswitch"))
 import settingsIO
-
-
-#
-#
-#   Notice:  updates to the image will only be reflected onto the desktop if the background
-#              image is set using Image Viewer, according to my testing.  The others must
-#              make static copies of it or something.
-#
-#
 
 
 defaultSettings = {"update":True,"date":True,"resIndex":0,"typeIndex":0,"green":True}
@@ -51,10 +55,10 @@ class VariableHandler ():
 
 
 
-def monitorWidth(): #Helps put the date in the corner where it should be
+def monitorWidth(): #Helps put the date in the corner where it should be (sometimes)
     from gi.repository import Gtk
     screen = Gtk.Window().get_screen()
-    if screen.get_n_monitors() > 1: #Multimonitor display, don't bother with date
+    if screen.get_n_monitors() > 1: #Multimonitor display; don't bother with date
         return "multiple monitors"
     firstMon = screen.get_monitor_geometry(0)
     return firstMon.width
