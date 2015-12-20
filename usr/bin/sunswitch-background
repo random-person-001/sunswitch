@@ -1,6 +1,5 @@
 #!/bin/bash
 PID=`pgrep -n sunswitch`
-#echo $PID
 #make sure directories are kosher
 mkdir -p "$HOME/.config/sunswitch"
 LOG="$HOME/.config/sunswitch/sunswitchLog"
@@ -14,9 +13,9 @@ function helptext () {
     echo "   sunswitch-background [initialDelay]"
 }
 
+
 INITIALDELAY=$1
 re='^[0-9]+$'
-
 
 if [ -z "$INITIALDELAY" ] ; then 
     INITIALDELAY=20
@@ -32,10 +31,7 @@ fi
 
 CONTINUE=`head -n 1 "$HOME/.config/sunswitch/settings.txt"` #Only continue if within user's wishes
 if [ "$CONTINUE" != "False" ]; then
-    echo "" >> $LOG #newline
-    echo "" >> $LOG #newline
-    echo "" >> $LOG #newline
-    echo "" >> $LOG #newline
+    echo -e "\n\n\n\n"   >> $LOG #newlines
     echo $(date +%Y%h%d) >> $LOG #date
 
     echo "/usr/bin/sunswitch-background starting with PID " $PID >> $LOG
@@ -45,8 +41,9 @@ if [ "$CONTINUE" != "False" ]; then
 
     for i in {1..800}
     do
-       echo "iteration $i"
+       echo -n "iteration $i ..."
        python /usr/lib/sunswitch/getSun.py "$@" >> $LOG
+       echo " is done"
        sleep 1200 # 1200=20min
     done
 
