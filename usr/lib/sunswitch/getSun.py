@@ -9,7 +9,8 @@ try:
     print "cv2 found the normal way"
 except ImportError as er:
     import sys
-    sys.path.append('/usr/local/lib/python2.7/site-packages')    
+    sys.path.append('/usr/local/lib/python2.7/site-packages')
+    sys.path.append('/usr/lib/python2.7/dist-packages')
     import cv2
     print "cv2 found with the workaround of adding usr/local/lib/....../site-packages"
     
