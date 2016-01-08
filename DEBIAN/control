@@ -4,7 +4,7 @@ Section: misc
 Installed-Size: 1000
 Priority: optional
 Architecture: all
-Depends: python (>= 2.7.0), python-pip
+Depends: python (>= 2.7.0), python-pip, python-opencv
 Maintainer: Riley Hunt <rileylegos6@gmail.com>
 Description: Sunswitch Utility
  Let your desktop reflect the sun!
