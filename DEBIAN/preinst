@@ -1,4 +1,4 @@
 #!/bin/bash
 mkdir $HOME"/.config/sunswitch" #For settings.txt
-pip install cv2  # Install a dependency
+#pip install cv2  # Install a dependency # Really doesn't work much.  Installing python-opencv through apt actually works.
 exit
