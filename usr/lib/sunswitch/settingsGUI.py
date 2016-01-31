@@ -246,7 +246,7 @@ class ListBoxWindow(Gtk.Window):
             self.resCombo.set_sensitive(True)
             self.picCombo.set_sensitive(True)
             self.scale.set_sensitive(False)
-        #self.update()
+        self.update()
 
 
     def debugDate(self, widget):
