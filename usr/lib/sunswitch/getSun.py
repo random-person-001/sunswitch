@@ -48,7 +48,7 @@ class VariableHandler ():
         self.dateAddress = "http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_"+self.whichPicture+".jpg"
 
         self.user = os.getlogin()
-        self.finalFile = "/home/"+self.user+"/Pictures/Wallpapers/latest-sun-new.jpg"
+        self.finalFile = "/home/"+self.user+"/Pictures/Wallpapers/latest-sunswitch-new.jpg"
         #print "Set " + self.finalFile + " as your desktop background with image viewer."
         self.mainFile = "/home/"+self.user+"/.config/sunswitch/latest-sun"#"/tmp/latest-sun"#"/home/"+self.user+"/.sunswitch/latest-sun"
         self.dateFile = "/home/"+self.user+"/.config/sunswitch/sun-date"#"/tmp/latest-sun"#"/home/"+self.user+"/.sunswitch/sun-date"
