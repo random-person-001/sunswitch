@@ -3,9 +3,9 @@ import os
 user = os.getlogin()
 #path = "/home/"+user+"/.sunswitch/settings.txt"
 path = "/home/"+user+"/.config/sunswitch/settings.txt"
-settingsDefault = {"update":True,"date":True,"resIndex":0,"typeIndex":0,"green":True,"flickr":False}
+settingsDefault = {"update":True,"date":True,"resIndex":0,"typeIndex":0,"green":True,"updateInterval":13,"flickr":False}
 settings = settingsDefault
-settingsOrder = ["update","date","resIndex","typeIndex","green","flickr"]
+settingsOrder = ["update","date","resIndex","typeIndex","green","updateInterval","flickr"]
 
 
 
@@ -56,17 +56,21 @@ def readSettings():
                         try:
                             that = int(that)
                         except ValueError as er:
-                            print "Non-numbery lines in settings file.  Resetting." + er
-                            rewrite = True
+                            try:
+                                that = float(that)
+                            except ValueError as er:                            
+                                print "Non-numbery lines in settings file.  Resetting."
+                                print er
+                                rewrite = True
                     #print that
                     settings[settingsOrder[i]] = that
                     i+=1
-                print "Done"
+                print "Settings read."
                 if i < len(settingsOrder):
                     print "Not enough settings in config.  Resetting."
                     rewrite = True
             if not rewrite:
-                if (type(settings[settingsOrder[0]]) != type(True)) or (type(settings[settingsOrder[1]]) != type(True)) or (type(settings[settingsOrder[4]]) != type(True)) or (type(settings[settingsOrder[5]]) != type(True)):
+                if (type(settings[settingsOrder[0]]) != type(True)) or (type(settings[settingsOrder[1]]) != type(True)) or (type(settings[settingsOrder[4]]) != type(True)) or (type(settings[settingsOrder[-1]]) != type(True)):
                     print "First two items (or last one) weren't bools!  Corrupt file!"
                     rewrite = True
                 if (settings[settingsOrder[2]] > 2) or (settings[settingsOrder[3]] > 9):

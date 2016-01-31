@@ -9,8 +9,9 @@ touch $SETTINGS
 chmod +rw+rw+rw $SETTINGS 
 
 function helptext () {
+    echo "'$@'not recognized"
     echo "sunswitch-background usage:"
-    echo "   sunswitch-background [initialDelay]"
+    echo "   sunswitch-background [initialDelay [updateDelay]]"
 }
 
 
@@ -27,6 +28,17 @@ else
     shift
 fi
 
+BETWEENDELAY=$1
+
+if [ -z "$BETWEENDELAY" ] ; then 
+    BETWEENDELAY=1200
+else
+    if ! [[ "$BETWEENDELAY" =~ $re ]] ; then
+        helptext
+        exit 1
+    fi    
+    shift
+fi
 
 
 CONTINUE=`head -n 1 "$HOME/.config/sunswitch/settings.txt"` #Only continue if within user's wishes
@@ -37,7 +49,7 @@ if [ "$CONTINUE" != "False" ]; then
 
     echo "/usr/bin/sunswitch-background starting with PID " $PID >> $LOG
     echo "PID is" $PID
-    echo "delaying start"
+    echo "delaying start by $INITIALDELAY seconds, and refreshing picture every $BETWEENDELAY seconds."
     sleep "$INITIALDELAY"
 
     for i in {1..800}
@@ -47,8 +59,9 @@ if [ "$CONTINUE" != "False" ]; then
            python /usr/lib/sunswitch/getSun.py "$@" >> $LOG
        else
            python /usr/lib/sunswitch/getFlickr.py "$@" >> $LOG
+       fi
        echo " is done"
-       sleep 1200 # 1200=20min
+       sleep $BETWEENDELAY # 1200=20min
     done
 
     echo "Finished"

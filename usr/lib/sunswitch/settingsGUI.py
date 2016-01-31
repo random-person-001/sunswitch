@@ -6,14 +6,23 @@ import getFlickr
 import settingsIO
 #import gtk as Gtk
 
-#defaultSettings= {"update":True,"date":True,"resIndex":0,"typeIndex":0,"green":True,"flickr":False}
-settingsOrder =   ["update",     "date",     "resIndex",  "typeIndex",  "green",     "flickr"]
+#defaultSettings= {"update":True,"date":True,"resIndex":0,"typeIndex":0,"green":True,"updateInterval":13,"flickr":False}
+settingsOrder =   ["update",     "date",     "resIndex",  "typeIndex",  "green",     "updateInterval",   "flickr"]
 
 class ListBoxWindow(Gtk.Window):
     settings = {"update":True,"date":True,"resIndex":0,"typeIndex":0,"green":True,"flickr":False}
 
     def __init__(self):
         self.settings = settingsIO.readSettings()
+        self.updateSeconds = 20
+        self.check = 'placeholder'
+        self.scale = 'placeholder'
+        self.resCombo = 'placeholder'
+        self.picCombo = Gtk.ComboBoxText()
+        self.resCombo = Gtk.ComboBoxText()
+        self.dateCheck = Gtk.CheckButton()
+        self.check = Gtk.CheckButton()
+        self.scale = Gtk.HScale()
         if self.settings == False:
             print "Uh-oh!  Your settings file appears to be corrupt.  We'll remake it."
             self.settings = settingsIO.writeDefaultSettings()
@@ -57,8 +66,24 @@ class ListBoxWindow(Gtk.Window):
         self.flickrCheck.connect("toggled", self.checkedFlickr)
         hbox.pack_start(label, True, True, 0)
         hbox.pack_start(self.flickrCheck, False, True, 0)
-        print self.settings
         self.flickrCheck.set_active(self.settings["flickr"])
+
+        listbox.add(row)
+
+
+#Slider for update
+        row = Gtk.ListBoxRow()
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+        label = Gtk.Label("Update Interval", xalign=0)
+        row.add(hbox)
+        self.scale.set_range(1, 35)
+        self.scale.set_size_request(200, 29)
+        self.scale.set_value(200)
+        self.scale.set_value(self.settings["updateInterval"])
+        self.scale.connect("format-value", self.changeScaleDisplay)
+        hbox.pack_start(label, True, True, 0)
+        hbox.pack_start(self.scale, False, True, 0)
+        #scale.connect("value-changed", self.updateInterval)
 
         listbox.add(row)
 
@@ -67,7 +92,6 @@ class ListBoxWindow(Gtk.Window):
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
         row.add(hbox)
         label = Gtk.Label("Insert Date At Bottom", xalign=0)
-        self.dateCheck = Gtk.CheckButton()
         self.dateCheck.connect("toggled", self.debugDate)
         hbox.pack_start(label, True, True, 0)
         hbox.pack_start(self.dateCheck, False, True, 0)
@@ -80,7 +104,6 @@ class ListBoxWindow(Gtk.Window):
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
         row.add(hbox)
         label = Gtk.Label("Decrease Green", xalign=0)
-        self.check = Gtk.CheckButton()
         self.check.connect("toggled", self.debugGreen)
         hbox.pack_start(label, True, True, 0)
         hbox.pack_start(self.check, False, True, 0)
@@ -93,7 +116,6 @@ class ListBoxWindow(Gtk.Window):
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
         row.add(hbox)
         label = Gtk.Label("Image Resolution", xalign=0)
-        self.resCombo = Gtk.ComboBoxText()
         self.resCombo.insert(0, "0", "2048")
         self.resCombo.insert(1, "1", "1024")
         self.resCombo.insert(2, "2", "512")
@@ -109,7 +131,6 @@ class ListBoxWindow(Gtk.Window):
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
         row.add(hbox)
         label = Gtk.Label("Image Type", xalign=0)
-        self.picCombo = Gtk.ComboBoxText()
         self.picCombo.insert(0, "1", "171")
         self.picCombo.insert(1, "1", "193")
         self.picCombo.insert(2, "2", "304")
@@ -184,7 +205,9 @@ class ListBoxWindow(Gtk.Window):
 
         listbox.add(row)
 
-        self.checkedFlickr(self) # Update greyed-out things
+        #self.scale.checkedFlickr(self) # Update greyed-out things
+        #self.checkedFlickr(self.exit)
+        #self.scale.flickrUpdate()
 
     def update(self):
         """
@@ -203,11 +226,11 @@ class ListBoxWindow(Gtk.Window):
         """
         self.settings["update"] = self.switch.get_active()
         self.settings["flickr"] = self.flickrCheck.get_active()
+        self.settings["updateInterval"] = self.scale.get_value()
         self.settings["green"] = self.check.get_active()
         self.settings["date"] = self.dateCheck.get_active()
         self.settings["resIndex"] = self.resCombo.get_active()
         self.settings["typeIndex"] = self.picCombo.get_active()
-#["update",     "date",     "resIndex",  "typeIndex",  "green"]
         return self.settings
 
     def checkedFlickr(self, widget):
@@ -216,18 +239,32 @@ class ListBoxWindow(Gtk.Window):
             self.dateCheck.set_sensitive(False)
             self.resCombo.set_sensitive(False)
             self.picCombo.set_sensitive(False)
+            self.scale.set_sensitive(True)
         else:
             self.check.set_sensitive(True)
             self.dateCheck.set_sensitive(True)
             self.resCombo.set_sensitive(True)
             self.picCombo.set_sensitive(True)
-        self.update()
+            self.scale.set_sensitive(False)
+        #self.update()
 
 
     def debugDate(self, widget):
         print "date was changed"
     def debugGreen(self, widget):
         print "green was changed"
+
+    def changeScaleDisplay(self, widget, value):
+        value = .01 * 2.71828 ** (.302*(value+24.4)) - 6
+        self.updateSeconds = value
+        if (value < 60):
+            return str(round(value)) + " s"
+        if (value < 3600):
+            return str(round(value/60)) + " m"
+        if (value < 3600*24):
+            return str(round(value/3600)) + " hr"
+        if (value < 3600*24*8):
+            return str(round(value/24/3600)) + " days"
 
     def preview(self, widget):
         eh = False
@@ -245,10 +282,11 @@ class ListBoxWindow(Gtk.Window):
         print ""
         
     def save(self, widget):
-        print "Saving:"
+        print "Saving configuration"
         settings = self.update()
-        print settings
+        #print settings
         settingsIO.saveSettings(settings)
+        self.restartBackground()
         #for sett in settings:
         #    print sett
         #    print settings[sett]
@@ -258,9 +296,35 @@ class ListBoxWindow(Gtk.Window):
         self.save(widget) #save on kill
         print "Bye!"
         Gtk.main_quit()
+
+    def restartBackground(self):
+        try:
+            print "Killing background sunswitch"
+            import subprocess, signal, os
+            p = subprocess.Popen(['ps', '-A'], stdout=subprocess.PIPE)
+            out, err = p.communicate()
+
+            for line in out.splitlines():
+                #print line
+                if 'sunswitch-bac' in line:
+                    print "Killed process: " + line
+                    pid = int(line.split(None, 1)[0])
+                    os.kill(pid, signal.SIGKILL)
+            print "Restarting background sunswitch"
+            p = subprocess.Popen(['nohup', 'sunswitch-background', '2', str(int(self.updateSeconds))], stdout=open('/dev/null', 'w'),  stderr=open('/home/'+os.getlogin()+'/.config/sunswitch/background.log', 'a'), preexec_fn=os.setpgrp)
+            print "Successfully killed any earlier processes, and started own."
+        finally:
+            pass
+        
+        #out, err = p.communicate()
+        #print out
+        #os.system( " "+ str(self.updateSeconds) +" &" )
+
         
 
 win = ListBoxWindow()
 win.connect("delete-event", Gtk.main_quit)
+win.connect("destroy-event", Gtk.main_quit)
+win.connect("destroy", Gtk.main_quit)
 win.show_all()
 Gtk.main()
