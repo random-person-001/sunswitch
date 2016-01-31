@@ -184,7 +184,7 @@ class ListBoxWindow(Gtk.Window):
 
         listbox.add(row)
 
-        self.checkedFlickr(self) # Update greyed-out things
+        self.checkedFlickr() # Update greyed-out things
 
     def update(self):
         """

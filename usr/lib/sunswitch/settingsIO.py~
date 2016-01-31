@@ -66,7 +66,7 @@ def readSettings():
                     print "Not enough settings in config.  Resetting."
                     rewrite = True
             if not rewrite:
-                if (type(settings[settingsOrder[0]]) != type(True)) or (type(settings[settingsOrder[1]]) != type(True)) or (type(settings[settingsOrder[4]]) != type(True)) or (type(settings[settingsOrder[5]]) != type(True)):
+                if (type(settings[settingsOrder[0]]) != type(True)) or (type(settings[settingsOrder[1]]) != type(True)) or (type(settings[settingsOrder[4]]) != type(True) or (type(settings[settingsOrder[5]]) != type(True)):
                     print "First two items (or last one) weren't bools!  Corrupt file!"
                     rewrite = True
                 if (settings[settingsOrder[2]] > 2) or (settings[settingsOrder[3]] > 9):

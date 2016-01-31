@@ -14,4 +14,4 @@ Description: Sunswitch Utility
  some bash frontends.
  .
  You can configure sunswitch with the gui window, or add it to the list of programs
- to begin on startup (Startup programs > add > command:"sunswitch -b").
+ to begin on startup (Startup programs > add > command:"sunswitch -b).
