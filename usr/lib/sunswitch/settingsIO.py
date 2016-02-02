@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import os
-user = os.getlogin()
+import pwd
+#user = os.getlogin() # throws OSError: [Errno 25] Inappropriate ioctl for device
+user = pwd.getpwuid(os.geteuid())[0]
 #path = "/home/"+user+"/.sunswitch/settings.txt"
 path = "/home/"+user+"/.config/sunswitch/settings.txt"
 settingsDefault = {"update":True,"date":True,"resIndex":0,"typeIndex":0,"green":True,"updateInterval":13,"flickr":False}
