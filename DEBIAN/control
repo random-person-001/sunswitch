@@ -13,5 +13,5 @@ Description: Sunswitch Utility
  tweak them, and set them as your desktop background.  It's written in Python, with
  some bash frontends.
  .
- You can configure sunswitch with the gui window, or add it to the list of programs
+ You can configure sunswitch with the gui window, and add it to the list of programs
  to begin on startup (Startup programs > add > command:"sunswitch -b").
